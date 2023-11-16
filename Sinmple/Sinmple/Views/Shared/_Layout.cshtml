@@ -1,0 +1,95 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using System.Security.Claims
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Sinmple</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Sinmple</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
+                        </li>
+                  
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Administrador"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Almacenes" asp-action="Index">Almacenes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Cuentas" asp-action="Index">Cuentas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Lotes" asp-action="Index">Lotes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="MovimientosInventarios" asp-action="Index">Movimientos de Inventario</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
+                                </li>
+                            }
+                            else if (User.IsInRole("Supervisor"))
+                            {
+                                <li class="nav-item">
+                                    <!-- Muestra solo las secciones relevantes para el rol de Supervisor -->
+                                    <a class="nav-link" asp-area="" asp-controller="Almacenes" asp-action="Index">Almacenes</a>
+                                </li>
+                                <!-- ... (otras secciones relevantes para el Supervisor) ... -->
+                            }
+                            else if (User.IsInRole("Empleado"))
+                            {
+                                <li class="nav-item">
+                                    <!-- Muestra solo las secciones relevantes para el rol de Empleado -->
+                                    <a class="nav-link" asp-area="" asp-controller="Almacenes" asp-action="Index">Almacenes</a>
+                                </li>
+                                <!-- ... (otras secciones relevantes para el Empleado) ... -->
+                            }
+                        }
+                        <p>Roles del Usuario: @string.Join(", ", User?.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value))</p>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Acceso" asp-action="Salir">Salir</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="bg-dark text-light text-center py-3">
+        <div class="container">
+            &copy; 2023 - Sinmple - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-light">Privacidad</a>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
