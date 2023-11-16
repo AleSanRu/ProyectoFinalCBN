@@ -1,0 +1,86 @@
+﻿@model Sinmple.Models.Usuarios
+@{
+    ViewData["Title"] = "Inicio de Sesión";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+  <style>
+
+        /* Estilos para el formulario de inicio de sesión */
+        body {
+            background-color: #f0f0f0; /* Color de fondo */
+        }
+
+        .login-container {
+            background-color: #fff; /* Fondo del contenedor */
+            border: 1px solid #ccc; /* Borde del contenedor */
+            border-radius: 8px; /* Borde redondeado */
+            padding: 30px; /* Espaciado interno */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Sombra */
+        }
+
+            .login-container h2 {
+                color: #333; /* Color de título */
+                text-align: center; /* Alineación del texto */
+                margin-bottom: 20px; /* Margen inferior */
+            }
+
+        .logo-img {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Ajuste de imagen */
+            margin: 0 auto 20px; /* Margen inferior con centrado horizontal */
+        }
+
+        .form-control {
+            border-color: #ccc; /* Color del borde del campo */
+        }
+
+            .form-control:focus {
+                border-color: #6c757d; /* Color del borde al enfocar */
+                box-shadow: none; /* Eliminar sombra al enfocar */
+            }
+
+        .btn-primary {
+            background-color: #007bff; /* Color de fondo del botón */
+            border-color: #007bff; /* Color del borde del botón */
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3; /* Color de fondo al pasar el mouse */
+                border-color: #0056b3; /* Color del borde al pasar el mouse */
+            }
+
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-4">
+            <div class="login-container">
+                <img src="~/Imagenes/CBN_logo.png" alt="Logo de inicio de sesión" class="logo-img" />
+                <form asp-controller="Acceso" asp-action="Index" method="post">
+                    <div class="mb-3">
+                        <label for="Correo" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="Correo" name="Correo" placeholder="Ingrese su correo electrónico" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="Clave" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="Clave" name="Clave" placeholder="Ingrese su contraseña" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Sinmple.Models.Lote>
+
+@{
+    ViewData["Title"] = "Índice";
+}
+
+<h1>REGISTRO DE LOTES</h1>
+
+<p>
+    <a asp-action="Create">Crear Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre_lote)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaElaboracion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaVencimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Productos_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Almacen_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuario_id)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre_lote)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaElaboracion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaVencimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Productos_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Almacen_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.usuario_id)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id_lote">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id_lote">Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id_lote">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
